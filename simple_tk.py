@@ -1,12 +1,12 @@
 from tkinter import *
 from tkinter import filedialog
 import os
-from DlogProc.LoadDlogList import DlogArray
-from DlogProc.CleanDlog import CleanDlog
-from SubSearches.PPCLow import PPCLow
+import time
+from LogProc.LoadDlogList import LogArray
+from LogProc.CleanLlog import CleanLog
 import matplotlib.backends.backend_pdf
 import matplotlib.pyplot as plt
-import time
+
 
 class GUI(Frame):
     def __init__(self, parent, desktop, user_stored_object):
@@ -86,23 +86,6 @@ class GUI(Frame):
             return 0
 
 
-class UserStoredVals:
-    def __init__(self):
-        self.file_names = ['Log List', 'Input Func.']
-        self.folder_names = ['Log Location']
-        self.dlog_list = None
-
-
-def main():
-    values_to_process = UserStoredVals()
-    desktop = os.path.join(os.path.expanduser('~'), 'Desktop')
-    root = Tk()
-    root.geometry("400x80+300+300")
-    app = GUI(root, desktop, values_to_process)
-    root.mainloop()
-    return values_to_process
-    # now we have the dlog file location, user wishes file, and the location of the dlogs.
-
 class GraphOrchestrator:
     def __init__(self, logs, user_values_object):
         self.logs = logs
@@ -133,6 +116,23 @@ class GraphOrchestrator:
     # this going to be a doozy.
     def user_args_to_panda_args(self):
         return
+class UserStoredVals:
+    def __init__(self):
+        self.file_names = ['Log List', 'Input Func.']
+        self.folder_names = ['Log Location']
+        self.dlog_list = None
 
+
+def main():
+    values_to_process = UserStoredVals()
+    desktop = os.path.join(os.path.expanduser('~'), 'Desktop')
+    root = Tk()
+    root.geometry("400x80+300+300")
+    app = GUI(root, desktop, values_to_process)
+    root.mainloop()
+    return values_to_process
+    
+    
 if __name__ == '__main__':
     user_entered_vals_object = main()
+    
